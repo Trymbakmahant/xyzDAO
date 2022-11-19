@@ -2,16 +2,14 @@ import React from "react";
 
 function Services() {
   return (
-    <section id="services">
+    <section id="services" style = {{marginBottom: "20%"}}>
       <div className="section-text">
         <div className="section-text__title-centered">
-          How can we help you with Anapp!
+          What xyz DAO brings at the table!
         </div>
         <div className="service-cards">
           <div className="service-card">
-            <div className="service-card__icon">
-              <ion-icon name="reader-outline" />
-            </div>
+          <span style = {{marginBottom: "18%"}}><img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/56/null/external-membership-night-club-flaticons-lineal-color-flat-icons-3.png"/></span>
             <div className="service-card__text-container">
               <div className="section-text__title-small">Become a Member </div>
               <div className="section-text__body">
@@ -20,11 +18,9 @@ function Services() {
               </div>
             </div>
           </div>
-
+          
           <div className="service-card active">
-            <div className="service-card__icon">
-              <ion-icon name="wallet-outline" />
-            </div>
+           <span style = {{marginBottom: "18%"}}><img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/56/null/external-partnership-recruitment-agency-flaticons-lineal-color-flat-icons.png"/></span>
             <div className="service-card__text-container">
               <div className="section-text__title-small">
                 Perks of being a Member
@@ -37,9 +33,7 @@ function Services() {
           </div>
 
           <div className="service-card">
-            <div className="service-card__icon">
-              <ion-icon name="chatbubble-ellipses-outline" />
-            </div>
+          <span style = {{marginBottom: "18%"}}><img src="https://img.icons8.com/external-wanicon-lineal-color-wanicon/56/null/external-content-influencer-marketing-wanicon-lineal-color-wanicon.png"/></span>
             <div className="service-card__text-container">
               <div className="section-text__title-small">Upload content</div>
               <div className="section-text__body">
