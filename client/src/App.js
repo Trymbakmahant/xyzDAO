@@ -17,7 +17,7 @@ export default function App() {
       <Home />
       <Features />
       <Services />
-      <UploadVideo />
+
       <Footer />
 
       {/* <Router>
