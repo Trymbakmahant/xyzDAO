@@ -5,11 +5,11 @@ import { NavLink } from "react-router-dom";
 function Navbar() {
   return (
     <div>
-      <div className="nav-content">
+      <div className="nav-content" style = {{marginTop: "10px"}}>
         <div className="nav-logo">
           <NavLink exact className="nav-link" to="/">
             <div className="nav-link__background" />
-            <div className="nav-logo">XYZDAO</div>
+            <div className="nav-logo">xyz DAO</div>
             <div className="nav-link__background" />
           </NavLink>
         </div>
@@ -17,7 +17,7 @@ function Navbar() {
           <NavLink exact className="nav-link" to="/videos">
             <div className="nav-link__background" />
             <div className="nav-link__text">
-              <h3>Videos</h3>
+              Videos
             </div>
             <div className="nav-link__background" />
           </NavLink>
@@ -26,9 +26,9 @@ function Navbar() {
             <div className="nav-link__text">Features</div>
             <div className="nav-link__background" />
           </NavLink>
-          <NavLink exact className="nav-link" to="/services">
+          <NavLink exact className="nav-link" to="/membership">
             <div className="nav-link__background" />
-            <div className="nav-link__text">Services</div>
+            <div className="nav-link__text">Membership</div>
             <div className="nav-link__background" />
           </NavLink>
           <NavLink exact className="nav-link" to="/uploadvideo">
@@ -36,13 +36,12 @@ function Navbar() {
             <div className="nav-link__text">Uploadvideo</div>
             <div className="nav-link__background" />
           </NavLink>
+          <button className="btn btn-primary">
+            <div className="nav-link__background" />
+            <div className="nav-link__text">Connect Wallet</div>
+            <div className="nav-link__background" />
+          </button>
         </nav>
-
-        <div className="nav-menu__icon">
-          <div />
-
-          <div />
-        </div>
       </div>
     </div>
   );

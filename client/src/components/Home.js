@@ -5,7 +5,7 @@ function Home() {
     <section id="home">
       <div className="container">
         <div className="home-text">
-          <div className="section-text__subtitle">Wellcome to XYZDAO</div>
+          <div className="section-text__subtitle">Welcome to xyz DAO</div>
           <div className="section-text__title-big">
             Take control of your content
           </div>
