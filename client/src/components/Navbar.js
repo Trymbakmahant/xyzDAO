@@ -36,10 +36,8 @@ function Navbar() {
             <div className="nav-link__text">Uploadvideo</div>
             <div className="nav-link__background" />
           </NavLink>
-          <button className="btn btn-primary">
-            <div className="nav-link__background" />
-            <div className="nav-link__text">Connect Wallet</div>
-            <div className="nav-link__background" />
+          <button className="download-btn" style = {{border: "none"}}>
+            Connect Wallet
           </button>
         </nav>
       </div>

@@ -12,7 +12,7 @@ const Host = () => {
         <Input type="text" label="Description" placeholder="xxt" />
         <Input type="date" label="Date" placeholder="xxx" />
         <Input type="number" label="Time" placeholder="xx" min="1" max="12" />
-        <select class="select select-info w-full max-w-xs">
+        <select className="select select-info w-full max-w-xs">
           <option disabled selected>
             AM/PM
           </option>
