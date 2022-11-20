@@ -29,7 +29,7 @@ section > .container {
   max-width: 1440px;
 }
 section > .container > * {
-  margin: auto 12px;
+  margin-left: 500 px;
 }
 
 @media screen and (max-width: 700px) {
@@ -73,6 +73,7 @@ section > .container > * {
   line-height: 1.3;
   margin-bottom: 24px;
   max-width: 600px;
+      margin-left: 500px;
 }
 .section-text__title-small {
   font-size: 24px;
@@ -83,9 +84,12 @@ section > .container > * {
 }
 .section-text__subtitle {
   color: #2b044d;
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-transform: uppercase;
   margin-bottom: 16px;
+  font-weight: bolder;
+      margin-left: 500px;
+      font-weight: bolder;
 }
 .section-text__body {
   color: #707b8e;
@@ -94,6 +98,7 @@ section > .container > * {
   margin-bottom: 15px;
   font-weight: 400;
   max-width: 300px;
+      margin-left: 500px;
 }
 
 .section-image {
@@ -188,6 +193,7 @@ section > .container > * {
   cursor: pointer;
   transition: all 0.2s linear;
   margin: 0;
+  margin-left: 500px;
 }
 .download-btn:hover {
   background-color: #da1276;

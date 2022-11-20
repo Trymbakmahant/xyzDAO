@@ -35,9 +35,9 @@ function Home() {
           <div className="section-text__title-big">
             Take control of your content
           </div>
-          <div className="section-text__body">
+          <div className='section-text__body'>
             <h2>
-              {" "}
+              {' '}
               This application allows you to support the content you enjoy and
               earn money for it.
             </h2>
@@ -52,7 +52,7 @@ function Home() {
         {/* <div className="section-image"></div> */}
       </div>
     </section>
-  );
+  )
 }
 
-export default Home;
+export default Home
