@@ -19,7 +19,7 @@ function Home() {
       })()
     }
 
-  }, [isConnected]);
+  }, [isConnected, isMember]);
 
   const memberHandler = async () => {
     if(isMember || !isConnected) return;
@@ -43,7 +43,7 @@ function Home() {
             </h2>
           </div>
           <button onClick={memberHandler}>
-            <a href="#download" className="download-btn">
+            <a href="#" className="download-btn">
               {isMember ? "You are a member" : "Register as a Member"}
             </a>
           </button>

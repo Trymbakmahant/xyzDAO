@@ -1,4 +1,5 @@
-import {useRef, useContext, useState} from "react";
+import { ethers } from "ethers";
+import {useRef, useContext, useState, useEffect} from "react";
 import { AppContext } from "../context/StateContext";
 
 const Host = () => {
@@ -32,7 +33,9 @@ const Host = () => {
       const thumbnail = thumbnailRef.current.value;
       const video = videoRef.current.value;
 
-      const tx = await ctx.sharedState.contractData.contract.createProposal(name, description, thumbnail, video);
+      let imageId = thumbnail.split('/')[5]
+      let imageUrl = `https://drive.google.com/uc?export=view&id=${imageId}`
+      const tx = await ctx.sharedState.contractData.contract.createProposal(name, description, imageUrl, video, {gasLimit: "32599708", value: ethers.utils.parseEther("20")});
       await tx.wait();
 
       nameRef.current.value = '';
