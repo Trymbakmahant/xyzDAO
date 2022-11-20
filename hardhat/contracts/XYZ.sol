@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+//SPDX-License-Identifier: MIT
 
 pragma solidity >=0.7.0 <0.9.0;
 
@@ -27,6 +27,7 @@ contract XYZ is Ownable{
         string videoUrl;
         bool isApproved;
         string cid;
+        address[] voters;
     }
 
     MarketAPI public marketapiInstance;
@@ -54,6 +55,10 @@ contract XYZ is Ownable{
     _;
     }
 
+    function isUserAMember() external view returns(bool){
+        return isMember[msg.sender];
+    }
+
     function becomeMember() external payable{
         require(isMember[msg.sender] == false, "You are already a member");
         require(msg.value >= 100 ether, "Amount is not enough");
@@ -66,7 +71,10 @@ contract XYZ is Ownable{
         require(msg.value >= proposalOrVotePrice, "Sent amount is lesser than required");
         
         totalProposals++;
-        Proposal memory newProposal = Proposal({proposalId: totalProposals, proposalName: _proposalName, description: _description, thumbnailUrl: _thumbnail, time: 3 days, createdBy: msg.sender, funds: msg.value, votes: 1, isUploaded: false, videoUrl: _videoUrl, isApproved: false, cid: ''});
+        address[] memory newVoters;
+        newVoters[0] = msg.sender;
+
+        Proposal memory newProposal = Proposal({proposalId: totalProposals, proposalName: _proposalName, description: _description, thumbnailUrl: _thumbnail, time: 3 days, createdBy: msg.sender, funds: msg.value, votes: 1, isUploaded: false, videoUrl: _videoUrl, isApproved: false, cid: '', voters: newVoters});
 
         proposals.push(newProposal);
     }
@@ -87,6 +95,11 @@ contract XYZ is Ownable{
         return activeProposals;
     }
 
+    //Get all of the proposals 
+    function getAllProposals() external view returns(Proposal[] memory){
+        return proposals;
+    }
+
     function Vote(uint _id) external payable isAMember{
         require(msg.value >= proposalOrVotePrice, "Sent amount is lesser than required");
         require(_id <= proposals.length, "No such proposal exist");
@@ -94,6 +107,7 @@ contract XYZ is Ownable{
 
         proposals[_id - 1].funds += msg.value;
         proposals[_id - 1].votes += 1;
+        proposals[_id - 1].voters.push(msg.sender);
     }
 
     // This function is not yet included in the sector by filecoin
@@ -120,6 +134,10 @@ contract XYZ is Ownable{
         require(msg.sender == proposals[_id - 1].createdBy, "You did not create this proposal");
         proposals[_id - 1].isApproved = true;
         proposals[_id - 1].cid = _cid;
+    }
+
+    function getBalance() external onlyOwner view returns(uint256){
+        return address(this).balance;
     }
 
     receive() external payable{}

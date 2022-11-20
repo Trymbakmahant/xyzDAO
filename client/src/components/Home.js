@@ -1,10 +1,36 @@
-import React from "react";
+import { ethers } from "ethers";
+import React, {useEffect, useContext, useState} from "react";
+import {AppContext} from "../context/StateContext";
 
 function Home() {
-  return (
+  const [isMember, setIsMember] = useState(false);
+
+  const ctx = useContext(AppContext);
+  const isConnected = ctx.sharedState.isConnected;
+
+  useEffect(() => {
+
+    if(isConnected){
+      (async function(){
+
+        const member =  await ctx.sharedState.checkMember();
+        setIsMember(member);
+        
+      })()
+    }
+
+  }, [isConnected]);
+
+  const memberHandler = async () => {
+    if(isMember || !isConnected) return;
+
+    await ctx.sharedState.contractData.contract.becomeMember({value: ethers.utils.parseEther("100")})
+  }
+
+   return (
     <section id="home">
       <div className="container">
-        <div className="home-text">
+        <div className="home-text" style = {{marginLeft: "15%"}}>
           <div className="section-text__subtitle">Welcome to xyz DAO</div>
           <div className="section-text__title-big">
             Take control of your content
@@ -16,9 +42,11 @@ function Home() {
               earn money for it.
             </h2>
           </div>
-          <a href="#download" className="download-btn">
-            Register as a Member
-          </a>
+          <button onClick={memberHandler}>
+            <a href="#download" className="download-btn">
+              {isMember ? "You are a member" : "Register as a Member"}
+            </a>
+          </button>
         </div>
 
         {/* <div className="section-image"></div> */}

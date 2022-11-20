@@ -3,7 +3,7 @@ import "../assets/footer.css";
 
 function Footer() {
   return (
-    <footer>
+    <footer style = {{marginTop: "25%"}}>
       <div className="container">
         <div className="row">
           <div className="col-30">

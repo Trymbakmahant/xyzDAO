@@ -1,30 +1,96 @@
-import Input from "./Input";
-// import Button from "../UI/Button";
-import { useState, useContext } from "react"; //import useContext
-// import { AppContext } from "../context/AddressContext"; // import Appcontext
-// import classes from "./Host.module.css";
+import {useRef, useContext, useState} from "react";
+import { AppContext } from "../context/StateContext";
 
 const Host = () => {
+  const [isMember, setIsMember] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const nameRef = useRef();
+  const descriptionRef = useRef();
+  const thumbnailRef = useRef();
+  const videoRef = useRef();
+  const ctx = useContext(AppContext);
+  
+
+  const isConnected = ctx.sharedState.isConnected;
+
+  const formSubmitHandler = async (event) => {
+    event.preventDefault();
+
+    if (!isConnected) return;
+
+    const checkMember = await ctx.sharedState.checkMember();
+
+    if(!checkMember) {
+      setIsMember(false);
+      return;
+
+    }else{
+      setIsLoading(true);
+      const name = nameRef.current.value;
+      const description = descriptionRef.current.value;
+      const thumbnail = thumbnailRef.current.value;
+      const video = videoRef.current.value;
+
+      const tx = await ctx.sharedState.contractData.contract.createProposal(name, description, thumbnail, video);
+      await tx.wait();
+
+      nameRef.current.value = '';
+      descriptionRef.current.value = '';
+      thumbnailRef.current.value = '';
+      videoRef.current.value = '';
+      setIsLoading(false);
+    }
+
+
+  };
+
+
   return (
-    <div>
-      <form className="Form1">
-        <Input type="text" label="Event Name" placeholder="xxxx" />
-        <Input type="text" label="Description" placeholder="xxt" />
-        <Input type="date" label="Date" placeholder="xxx" />
-        <Input type="number" label="Time" placeholder="xx" min="1" max="12" />
-        <select className="select select-info w-full max-w-xs">
-          <option disabled selected>
-            AM/PM
-          </option>
-          <option>AM</option>
-          <option>PM</option>
-        </select>
-        <Input
+    <div style = {{marginTop: "6%", marginLeft: "40%"}}>
+      {!isMember && <h1 style = {{color:"red"}}>You are not a member</h1>}
+      <form className="form-control w-full max-w-xs" onSubmit={formSubmitHandler}>
+        <label className="label">
+          <span className="label-text">Video name</span>
+        </label>
+        <input
           type="text"
-          label="Thumbnail"
-          placeholder="Thumbnail of the video (Google Drive link)"
-          // inputChange={inputHandler}
+          placeholder="Enter the video name"
+          className="input input-bordered input-info w-full max-w-xs"
+          ref={nameRef}
+          required
         />
+        <label className="label">
+          <span className="label-text">Description</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Enter Description"
+          className="input input-bordered input-info w-full max-w-xs"
+          ref= {descriptionRef}
+          required
+        />
+        <label className="label">
+          <span className="label-text">Thumbnail</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Thumbnail url(Google drive link)"
+          className="input input-bordered input-info w-full max-w-xs"
+          ref={thumbnailRef}
+          required
+        />
+        <label className="label">
+          <span className="label-text">Video Url</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Video url(Google drive link)"
+          className="input input-bordered input-info w-full max-w-xs"
+          ref={videoRef}
+          required
+        />
+        <button type = "submit" className={`btn btn-outline btn-success ${isLoading && "loading"}`} style = {{marginTop: "7%"}}>{isLoading ? "Submitting..." : "Submit"}</button>
       </form>
     </div>
   );

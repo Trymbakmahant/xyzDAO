@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import "../assets/navbar.css";
 import { NavLink } from "react-router-dom";
+import {AppContext} from "../context/StateContext";
+
 function Navbar() {
+  const ctx = useContext(AppContext);
+  let accountAddress = ctx.sharedState.contractData.accountAddress;
+
+  const connectWalletHandler = () => {
+    ctx.sharedState.connectWallet();
+  };
+
+
   return (
     <div>
       <div className="nav-content" style = {{marginTop: "10px"}}>
@@ -36,8 +46,8 @@ function Navbar() {
             <div className="nav-link__text">Uploadvideo</div>
             <div className="nav-link__background" />
           </NavLink>
-          <button className="download-btn" style = {{border: "none"}}>
-            Connect Wallet
+          <button className="download-btn" style = {{border: "none"}} onClick = {connectWalletHandler}>
+            {accountAddress ? `${accountAddress.substr(0, 5)}...${accountAddress.substr(37,42)}` : "Connect Wallet"}
           </button>
         </nav>
       </div>

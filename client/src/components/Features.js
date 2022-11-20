@@ -2,7 +2,7 @@ import React from "react";
 
 function Features() {
   return (
-    <section id="features">
+    <section id="features" style = {{marginBottom: "10%", marginLeft: "20%"}}>
       <div className="container">
         <div className="section-text">
           <div className="section-text__title">
